@@ -1,0 +1,20 @@
+{
+  // Pymo Fuerza de Ventas: un Worker que solo sirve los archivos estáticos que
+  // genera "npm run build" (Next.js con output: 'export', carpeta out/).
+  // Cloudflare lo publica solo en cada push a master (Workers Builds).
+
+  // Debe llamarse igual que el Worker conectado en Cloudflare (Workers Builds).
+  "name": "pymo",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Dominio propio. Funciona porque el Worker vive en la misma cuenta de
+  // Cloudflare que la zona apolosoft.com (la de Marcas).
+  "routes": [
+    { "pattern": "pymo.apolosoft.com", "zone_name": "apolosoft.com", "custom_domain": true }
+  ],
+  "workers_dev": true
+}
